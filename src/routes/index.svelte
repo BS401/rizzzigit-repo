@@ -2,6 +2,7 @@
 	import Footer from '../components/footer.svelte';
 	import Main from '../components/main.svelte';
 	import Navigation from '../components/navigation.svelte';
+
 	import { run } from '../main';
 </script>
 
@@ -11,7 +12,7 @@
 <div class="backgroundDecorator" />
 
 <div class="container">
-	<Navigation></Navigation>
-	<Main></Main>
-	<Footer></Footer>
+	<Navigation />
+	<Main />
+	<Footer />
 </div>
