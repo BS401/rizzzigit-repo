@@ -1,0 +1,320 @@
+body {
+  margin: 0px;
+  color: white;
+  user-select: none;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+div.background {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
+
+div.background > video {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+div.container {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+div.backgroundDecorator {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  left: 0px;
+  top: 0px;
+
+  backdrop-filter: blur(16px);
+
+  background-image: linear-gradient(
+    to bottom,
+    #7a589fff 0%,
+    #7a589f40 30%,
+    #7a589f40 70%,
+    #7a589fff 100%
+  );
+  /* background-image: linear-gradient(
+    to bottom,
+    #fc9 0%,
+    #ffbb9940 30%,
+    #ff999940 70%,
+    #f69 100%); */
+}
+
+div.navigationContainer {
+  width: 100%;
+  height: 64px;
+
+  position: fixed;
+  left: 0px;
+  top: 0px;
+
+  box-sizing: border-box;
+
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
+
+  background-color: #ffffff40;
+  backdrop-filter: blur(16px);
+
+  box-shadow: 0px 1px 4px 2px;
+}
+
+div.navigationContent {
+  max-width: 1280px;
+
+  height: 100%;
+  margin: auto;
+
+  box-sizing: border-box;
+  padding: 0px 32px 0px 32px;
+}
+
+div.navigationLogoContainer {
+  width: 64px;
+  height: 100%;
+
+  float: left;
+}
+
+div.navigationLogoContainerLayout {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+}
+
+img.navigationLogo {
+  margin: auto;
+
+  width: 48px;
+  filter: drop-shadow(2px 2px 4px #dddddd);
+}
+
+img.navigationLogo:hover {
+  filter: drop-shadow(2px 2px 4px white);
+  cursor: pointer;
+}
+div.navigationButtonContainer {
+  display: none;
+}
+
+nav.navigationListContainer {
+  float: left;
+  padding-left: 16px;
+
+  height: 100%;
+}
+
+ul.navigationList {
+  width: 100%;
+  height: 100%;
+
+  margin: 0px;
+  padding: 0px;
+}
+
+li.navigationEntry > p {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  text-align: center;
+}
+
+li.navigationEntry {
+  list-style-type: none;
+
+  min-width: 16px;
+  height: 100%;
+
+  float: left;
+
+  display: flex;
+  align-items: center;
+}
+
+li.navigationEntry:hover {
+  filter: drop-shadow(2px 2px 4px white);
+  cursor: pointer;
+}
+
+div.mainContainer {
+  max-width: 1280px;
+  margin: auto;
+  min-height: 100%;
+  box-sizing: border-box;
+
+  padding: 64px 0px 0px 0px;
+}
+
+div.mainContent {
+  height: 100%;
+}
+
+div.footerContainer {
+  width: 100%;
+  height: 64px;
+
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  border-top: solid;
+  border-top-width: 1px;
+  border-top-color: white;
+
+  background-color: #ffffff40;
+  backdrop-filter: blur(16px);
+
+  box-shadow: 0px -1px 4px 2px;
+}
+
+div.navigationContainerOnScrollZero {
+  box-shadow: none;
+}
+
+div.siteAuthor {
+  min-width: 64px;
+  height: 100%;
+
+  float: left;
+
+  display: flex;
+  align-items: center;
+}
+
+div.siteAuthor > div > div > p {
+  margin: 0px;
+}
+
+div.siteAuthor > div > div.siteAuthorName {
+  display: flex;
+  align-items: center;
+
+  font-size: 12px;
+}
+
+div.siteAuthor > div > div.siteAuthorName > p {
+  margin-right: 8px;
+}
+
+div.mainPanel {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+div.mainLeftPanel {
+  float: left;
+  width: calc(100% - 400px);
+  height: 64px;
+  background-color: blue;
+}
+
+div.mainRightPanel {
+  float: right;
+  width: 400px;
+  height: 64px;
+  background-color: green;
+}
+
+@media screen and (max-width: 720px) {
+  div.navigationContent {
+    padding: 0px 8px 0px 8px;
+  }
+
+  div.background {
+    display: none;
+  }
+
+  div.backgroundDecorator {
+    background-color: #7a589fff;
+  }
+
+  div.navigationButtonContainer {
+    display: block;
+    width: 64px;
+    height: 100%;
+
+    float: right;
+  }
+
+  div.navigationButtonContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  div.navigationButton {
+    width: 32px;
+    height: 32px;
+
+    border: solid;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  nav.navigationListContainer {
+    display: none;
+  }
+
+  nav.navigationButtonClicked {
+    display: block;
+    background-color: #7a589fff;
+
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 64px);
+
+    left: 0px;
+    top: 64px;
+  }
+
+  nav.navigationButtonClicked > ul.navigationList > li.navigationEntry {
+    width: 128px;
+    height: 32px;
+
+    display: flex;
+    float: none;
+    text-align: left;
+
+    margin: 32px 0px 0px 0px;
+  }
+
+  nav.navigationButtonClicked > ul.navigationList > li.navigationEntry > p {
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  div.mainPanel {
+    width: 100%;
+  }
+}
