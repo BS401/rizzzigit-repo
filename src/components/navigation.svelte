@@ -10,7 +10,7 @@
   <div class="navigationContent">
     <div class="navigationLogoContainer">
       <div class="navigationLogoContainerLayout" on:click={() => open(pages[0])} on:keypress={() => open(pages[0])}>
-        <img class="navigationLogo" src="images/favicon_solid.svg" alt="TWICE Logo" />
+        <img class="navigationLogo" src="images/favicon_solid_white.svg" alt="TWICE Logo" />
       </div>
     </div>
     <div class="navigationButtonContainer">

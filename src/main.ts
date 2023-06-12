@@ -3,30 +3,37 @@ const constants = {
 }
 
 const checkScroll = async (document: Document): Promise<void> => {
-  // const navigationContainer = document.querySelector('div.navigationContainer')
-  // const footerContainer = document.querySelector('div.footerContainer')
-  // if (navigationContainer != null && footerContainer != null) {
-  //   const className = 'navigationContainerOnScrollZero'
-  //   if (document.documentElement.scrollTop === 0) {
-  //     if (!navigationContainer.classList.contains(className)) {
-  //       navigationContainer.classList.add(className)
-  //     }
-  //     if (!footerContainer.classList.contains(className)) {
-  //       footerContainer.classList.add(className)
-  //     }
-  //   } else {
-  //     if (navigationContainer.classList.contains(className)) {
-  //       navigationContainer.classList.remove(className)
-  //     }
-  //     if (footerContainer.classList.contains(className)) {
-  //       footerContainer.classList.remove(className)
-  //     }
-  //   }
-  // }
+  if (document.location.pathname !== '/') {
+    return
+  }
+
+  const navigationContainer = document.querySelector('div.navigationContainer')
+  const footerContainer = document.querySelector('div.footerContainer')
+  if (navigationContainer != null && footerContainer != null) {
+    const className = 'navigationContainerOnScrollZero'
+    if (document.documentElement.scrollTop === 0) {
+      if (!navigationContainer.classList.contains(className)) {
+        navigationContainer.classList.add(className)
+      }
+      if (!footerContainer.classList.contains(className)) {
+        footerContainer.classList.add(className)
+      }
+    } else {
+      if (navigationContainer.classList.contains(className)) {
+        navigationContainer.classList.remove(className)
+      }
+      if (footerContainer.classList.contains(className)) {
+        footerContainer.classList.remove(className)
+      }
+    }
+  }
 }
 
 const setupVideo = async (element?: HTMLVideoElement): Promise<void> => {
-  if (element == null) {
+  if (
+    (element == null) ||
+    (document.location.pathname !== '/')
+  ) {
     return
   }
 
@@ -79,10 +86,31 @@ const setupNavToggle = async (document: Document): Promise<void> => {
   })
 }
 
+const setupBackground = async (document: Document) => {
+  const background = document.querySelector('div.background')
+  const backgroundDecorator = document.querySelector('div.backgroundDecorator')
+
+  if (document.location.pathname !== '/') {
+    background?.classList.add('backgroundNotAtHome')
+    backgroundDecorator?.classList.add('backgroundDecoratorNotAtHome')
+  }
+}
+
+// const setupResize = async (window: Window, document: Document): Promise<void> => {
+//   const background = document.querySelector('div.background')
+
+//   window.addEventListener('resize', () => {
+//     if (window.innerWidth <= 720) {
+
+//     }
+//   })
+// }
+
 export const run = async (document: Document): Promise<void> => {
   document.addEventListener('scroll', () => { void checkScroll(document) })
 
   void setupVideo(document.querySelector('div.background')?.children[0] as HTMLVideoElement | undefined)
   void checkScroll(document)
+  void setupBackground(document)
   void setupNavToggle(document)
 }
