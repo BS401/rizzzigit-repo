@@ -67,7 +67,7 @@
   }
 
   div.space {
-    height: 128px;
+    height: 64px;
   }
 </style>
 
@@ -80,6 +80,20 @@
       <h1>「Hare Hare」</h1>
       <p>TWICE Japan 10th single</p>
       <div class="space"></div>
+
+      <div class="linkContainer">
+        <button on:click={() => {
+          // window.open('https://www.youtube.com/watch?v=-uqWaGzQyxA', '_top')
+        }}>{'▶'} Watch on YouTube</button>
+
+        <button on:click={() => {
+          // window.open('https://open.spotify.com/track/3QcJghvqRS17RoPPP0C2sp', '_top')
+        }}>{'▶'} Listen on Spotify</button>
+
+        <button on:click={() => {
+          // window.open('https://www.amazon.com/Hare-Regular-Version-TWICE/dp/B0BYD5QWBY', '_top')
+        }}>{'🛒'} Buy on Amazon</button>
+      </div>
     </div>
   </div>
 </div>

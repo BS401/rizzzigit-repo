@@ -336,3 +336,26 @@ div.backgroundDecoratorNotAtHome {
     width: 100%;
   }
 }
+
+button {
+  box-sizing: border-box;
+  padding: 12px;
+  font-size: 16px;
+
+  background-color: #7a589fff;
+
+  color: white;
+  border-radius: 8px;
+  border: solid;
+  border-color: transparent;
+
+  box-shadow: 2px 2px 2px 2px #ffffff40;
+
+  margin: 4px;
+}
+
+button:hover {
+  cursor: pointer;
+  border-color: white;
+  box-shadow: 2px 2px 2px 2px #ffffff80;
+}

@@ -7,7 +7,7 @@ const checkScroll = async (window: Window, document: Document): Promise<void> =>
     const background = document.querySelector('div.background') as HTMLDivElement
     const backgroundDecorator = document.querySelector('div.backgroundDecorator') as HTMLDivElement
 
-    const scrollProgress = (document.documentElement.scrollTop + 64) / window.innerHeight
+    const scrollProgress = document.documentElement.scrollTop / (window.innerHeight - 128)
     backgroundDecorator.style.backdropFilter = `blur(${Math.min(32, scrollProgress * 32)}px)`
     background.style.opacity = `${100 - Math.min(100, scrollProgress * 100)}%`
     if (window.innerWidth > 720) {
