@@ -8,12 +8,12 @@ body {
 }
 
 div.background {
-  width: 100%;
-  height: 100%;
+  width: 125%;
+  height: 125%;
 
   position: fixed;
-  left: 0px;
-  top: 0px;
+  left: -25%;
+  top: calc(-25% / 2);
 }
 
 div.background > video {
@@ -24,6 +24,8 @@ div.background > video {
   position: relative;
   left: 0px;
   top: 0px;
+
+  filter: grayscale(0%);
 }
 
 div.container {
@@ -43,7 +45,7 @@ div.backgroundDecorator {
   left: 0px;
   top: 0px;
 
-  backdrop-filter: blur(16px);
+  /* backdrop-filter: blur(16px); */
 
   background-image: linear-gradient(
     to bottom,
@@ -172,7 +174,9 @@ div.mainContainer {
 }
 
 div.mainContent {
-  height: 100%;
+  padding: 0px;
+  height: 1px;
+  min-height: 100%;
 }
 
 div.footerContainer {
@@ -197,6 +201,8 @@ div.navigationContainerOnScrollZero {
   border-bottom: none;
   backdrop-filter: as;
   background-color: transparent;
+
+  backdrop-filter: none;
 }
 
 div.siteAuthor {
@@ -252,6 +258,14 @@ div.backgroundDecoratorNotAtHome {
 }
 
 @media screen and (max-width: 720px) {
+  div.background {
+    width: 100%;
+    height: 100%;
+
+    left: 0px;
+    top: 0px;
+  }
+
   div.navigationContent {
     padding: 0px 8px 0px 8px;
   }

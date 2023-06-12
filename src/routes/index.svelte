@@ -7,7 +7,7 @@
 	import { run } from '../main';
 </script>
 
-<div class="background" on:load={void run(document)}>
+<div class="background" on:load={void run(window, document)}>
 	<video loop autoplay muted />
 </div>
 <div class="backgroundDecorator" />

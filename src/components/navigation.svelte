@@ -6,7 +6,7 @@
   }
 </script>
 
-<div class="navigationContainer">
+<div class="navigationContainer navigationContainerOnScrollZero">
   <div class="navigationContent">
     <div class="navigationLogoContainer">
       <div class="navigationLogoContainerLayout" on:click={() => open(pages[0])} on:keypress={() => open(pages[0])}>

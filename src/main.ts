@@ -1,10 +1,34 @@
 const constants = {
-  videos: 'videos/background_360p.mp4'
+  videos: 'videos/background.mp4'
 }
 
-const checkScroll = async (document: Document): Promise<void> => {
-  if (document.location.pathname !== '/') {
-    return
+const checkScroll = async (window: Window, document: Document): Promise<void> => {
+  if (document.location.pathname === '/') {
+    const background = document.querySelector('div.background') as HTMLDivElement
+    const backgroundDecorator = document.querySelector('div.backgroundDecorator') as HTMLDivElement
+
+    const scrollProgress = (document.documentElement.scrollTop + 64) / window.innerHeight
+    backgroundDecorator.style.backdropFilter = `blur(${Math.min(32, scrollProgress * 32)}px)`
+    background.style.opacity = `${100 - Math.min(100, scrollProgress * 100)}%`
+    if (window.innerWidth > 720) {
+      background.style.top = `-${(25 / 2) + (Math.min(25, scrollProgress * 25))}%`;
+    } else {
+      background.style.top = '0px'
+    }
+
+    const video = background.children[0] as HTMLVideoElement
+
+    video.addEventListener('playing', () => {
+      if (background.style.opacity == '0') {
+        video.pause()
+      }
+    })
+
+    if (background.style.opacity == '0') {
+      video.pause()
+    } else if (video.paused) {
+      void video.play()
+    }
   }
 
   const navigationContainer = document.querySelector('div.navigationContainer')
@@ -106,11 +130,11 @@ const setupBackground = async (document: Document) => {
 //   })
 // }
 
-export const run = async (document: Document): Promise<void> => {
-  document.addEventListener('scroll', () => { void checkScroll(document) })
+export const run = async (window: Window, document: Document): Promise<void> => {
+  document.addEventListener('scroll', () => { void checkScroll(window, document) })
 
+  void checkScroll(window, document)
   void setupVideo(document.querySelector('div.background')?.children[0] as HTMLVideoElement | undefined)
-  void checkScroll(document)
   void setupBackground(document)
   void setupNavToggle(document)
 }
