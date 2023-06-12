@@ -1,12 +1,26 @@
 <script lang="ts">
-  const pages: string[] = ['Home', 'News', 'Discography', 'Schedule']
+  const pages: string[] = ['Home', 'News', 'Discography', 'Schedule', 'Photos', 'Links', 'About Programmer']
 
   function open (page: string) {
-    window.open(`/${page == 'Home' ? '' : page.toLowerCase()}`, '_top')
+    const path = `/${page == 'Home' ? '' : page.toLowerCase()}`
+
+    if (path == document.location.pathname) {
+      return
+    }
+
+    window.open(path, '_top')
+  }
+
+  const run = () => {
+    document.title = `${
+      (document.location.pathname !== '/')
+        ? `${pages[pages.findIndex(e => `/${e.toLowerCase()}` == document.location.pathname)]} | `
+        : ''
+    }TWICE Fan Page`
   }
 </script>
 
-<div class="navigationContainer navigationContainerOnScrollZero">
+<div on:load={void run()} class="navigationContainer navigationContainerOnScrollZero">
   <div class="navigationContent">
     <div class="navigationLogoContainer">
       <div class="navigationLogoContainerLayout" on:click={() => open(pages[0])} on:keypress={() => open(pages[0])}>

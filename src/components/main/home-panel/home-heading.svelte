@@ -1,10 +1,5 @@
 <script>
 	import { Client } from "../../../api/core/client";
-
-  export const run = async () => {
-    const client = Client.getInstance()
-    const { resources: { news } } = client
-  }
 </script>
 
 <style>
@@ -71,7 +66,7 @@
   }
 </style>
 
-<div on:load={void run()} class="headingContainer">
+<div class="headingContainer">
    <div class="headingFlexContainer">
     <div class="headingContent">
       <div class="albumImage">

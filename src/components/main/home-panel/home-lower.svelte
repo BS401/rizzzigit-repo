@@ -14,16 +14,7 @@
 </style>
 
 <div class="lowerContainer">
-  <HomeSection _class="news" type="news"/>
-  <HomeSection _class="discography" type="discography"/>
-  <HomeSection _class="schedule" type="schedule"/>
-  <HomeSection _class="photos" type="photos"/>
-  <div class="section newsContainer">
-  </div>
-  <div class="section discography">
-  </div>
-  <div class="section schedule">
-  </div>
-  <div class="section photos">
-  </div>
+  <HomeSection type="News"/>
+  <HomeSection type="Discography"/>
+  <HomeSection type="Photos"/>
 </div>
