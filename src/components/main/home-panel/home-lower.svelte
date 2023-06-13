@@ -15,6 +15,5 @@
 
 <div class="lowerContainer">
   <HomeSection type="News"/>
-  <HomeSection type="Discography"/>
   <HomeSection type="Photos"/>
 </div>

@@ -1,5 +1,7 @@
-const constants = {
-  videos: 'videos/background.mp4'
+const context = {
+  videos: 'videos/background.mp4',
+  scrollProgress: 0,
+  videoProgressCheckerRunning: false
 }
 
 const checkScroll = async (window: Window, document: Document): Promise<void> => {
@@ -7,27 +9,13 @@ const checkScroll = async (window: Window, document: Document): Promise<void> =>
     const background = document.querySelector('div.background') as HTMLDivElement
     const backgroundDecorator = document.querySelector('div.backgroundDecorator') as HTMLDivElement
 
-    const scrollProgress = document.documentElement.scrollTop / (window.innerHeight - 128)
-    backgroundDecorator.style.backdropFilter = `blur(${Math.min(32, scrollProgress * 32)}px)`
-    background.style.opacity = `${100 - Math.min(100, scrollProgress * 100)}%`
+    const scrollProgress = context.scrollProgress = Math.min(1, document.documentElement.scrollTop / (window.innerHeight - 128))
+    backgroundDecorator.style.backdropFilter = `blur(${scrollProgress * 32}px)`
+    background.style.opacity = `${100 - scrollProgress * 100}%`
     if (window.innerWidth > 720) {
-      background.style.top = `-${(25 / 2) + (Math.min(25, scrollProgress * 25))}%`;
+      background.style.top = `-${(25 / 2) + (scrollProgress * 25)}%`;
     } else {
       background.style.top = '0px'
-    }
-
-    const video = background.children[0] as HTMLVideoElement
-
-    video.addEventListener('playing', () => {
-      if (background.style.opacity == '0') {
-        video.pause()
-      }
-    })
-
-    if (background.style.opacity == '0') {
-      video.pause()
-    } else if (video.paused) {
-      void video.play()
     }
   }
 
@@ -61,24 +49,40 @@ const setupVideo = async (element?: HTMLVideoElement): Promise<void> => {
     return
   }
 
-  element.src = constants.videos
+  element.src = context.videos
 
-  element.addEventListener('playing', () => {
-    const run = async (): Promise<void> => {
-      // eslint-disable-next-line no-constant-condition
-      while (true) {
-        sessionStorage.setItem('videoTime', element.currentTime.toString())
-
-        await new Promise<void>((resolve) => setTimeout(resolve, 100))
-      }
+  const run = async (): Promise<void> => {
+    if (context.videoProgressCheckerRunning) {
+      return
     }
 
-    void run()
-  })
+    try {
+      context.videoProgressCheckerRunning = true
+
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        if (element.paused) {
+          if (context.scrollProgress != 1) {
+            await element.play()
+          }
+        } else {
+          if (context.scrollProgress == 1) {
+            element.pause()
+          }
+
+          sessionStorage.setItem('videoTime', element.currentTime.toString())
+        }
+        await new Promise<void>((resolve) => setTimeout(resolve, 100))
+      }
+    } finally {
+      context.videoProgressCheckerRunning = false
+    }
+  }
 
   const time = element.currentTime = ((num) => Number.isNaN(num) ? 0 : num)(Number(sessionStorage.getItem('videoTime')))
   await element.play()
   element.currentTime = time
+  void run()
 }
 
 const setupNavToggle = async (document: Document): Promise<void> => {
@@ -95,7 +99,6 @@ const setupNavToggle = async (document: Document): Promise<void> => {
   }
 
   const toggle = (value: boolean): void => {
-    console.log('asd')
     if ((!value) && navElement.classList.contains('navigationButtonClicked')) {
       navElement.classList.remove('navigationButtonClicked')
     } else if (value && !navElement.classList.contains('navigationButtonClicked')) {

@@ -13,4 +13,7 @@ export abstract class BaseResource<R extends BaseResource<R, M>, M extends BaseM
 
   public get manager (): M { return this.#manager }
   public get id (): string { return this.#id }
+
+  public get createTime (): bigint { return this.#data.createTime as bigint }
+  public get updateTime (): bigint { return this.#data.updateTime as bigint }
 }

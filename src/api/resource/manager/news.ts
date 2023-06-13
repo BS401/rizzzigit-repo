@@ -8,13 +8,9 @@ export class NewsManager extends BaseManager<NewsResource, NewsManager> {
   }
 
   public async list (offset?: number, length?: number) {
-    const { main: { client: { options: { baseUrl }, api } } } = this
-    const url = new URL(baseUrl)
+    const { main: { client: { api } } } = this
 
-    url.pathname = '/n'
-    Object.assign(url.searchParams, { offset, length })
-
-    return (await api.request(url, { method: 'GET' })).data.map((entry: any) => new NewsResource(this, entry._id, entry))
+    return (await api.request(this.generateURL(['n'], { offset, length }), { method: 'GET' })).data.map((entry: any) => new NewsResource(this, entry._id, entry))
   }
 
   public async get (id: string) {
