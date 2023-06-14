@@ -2,12 +2,13 @@
 	import { SvelteComponent, onMount } from "svelte";
 	import { Client } from "../../../api/core/client";
 	import NewsComponent from "./content/news-component.svelte";
+	import PictureComponent from "./content/picture-component.svelte";
 
   type Functions = {
     list: (offset: number, length: number) => Promise<[typeof SvelteComponent, any][]>
   }
 
-  export let type: 'News' | 'Photos'
+  export let type: 'News' | 'Pictures'
 
   let element: HTMLDivElement
   let previousButton: HTMLButtonElement
@@ -58,9 +59,9 @@
     }
   })
 
-  const setupPhotos = async (client: Client): Promise<Functions> => ({
+  const setupPictures = async (client: Client): Promise<Functions> => ({
     list: async (offset, length) => {
-      return []
+      return (await client.resources.pictures.list(offset, length) as any[]).map((entry) => [PictureComponent, entry])
     }
   })
 
@@ -88,7 +89,7 @@
     functions = await (async () => {
       switch (type) {
         case 'News': return await setupNews(client)
-        case 'Photos': return await setupPhotos(client)
+        case 'Pictures': return await setupPictures(client)
         default: throw new Error(`Unknown page: ${type}`)
       }
     })()

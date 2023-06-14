@@ -14,11 +14,11 @@ export class FileManager extends BaseManager<FileResource, FileManager> {
   public async upload (file: File): Promise<FileResource> {
     const { main: { client: { api } } } = this
 
-    const { tokenId } = await api.request(this.generateURL(['f']), {
+    const { data: { tokenId  } } = await api.request(this.generateURL(['f']), {
       method: 'PUT'
     })
 
-    const { fileId } = await api.request(this.generateURL(['f', 'upload', tokenId]), {
+    const { data: { fileId } } = await api.request(this.generateURL(['f', 'upload', tokenId]), {
       method: 'POST',
       body: file
     })

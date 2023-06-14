@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-import type { NewsResource } from "../../../../api/resource/data/news";
+  import type { NewsResource } from "../../../../api/resource/data/news";
 
   export let data: NewsResource
   let image: HTMLImageElement

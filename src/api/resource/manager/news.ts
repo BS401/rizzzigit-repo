@@ -1,3 +1,5 @@
+import type NewsComponent from "../../../components/main/home-panel/content/news-component.svelte";
+import type { FileResource } from "../data/file";
 import { NewsResource } from "../data/news";
 import type { MainManager } from "../main";
 import { BaseManager } from "./base";
@@ -21,5 +23,14 @@ export class NewsManager extends BaseManager<NewsResource, NewsManager> {
 
     const data = await api.request(url, { method: 'GET' })
     return new NewsResource(this, data._id, data)
+  }
+
+  public async create (title: string, thumbnail: FileResource, contents: NewsComponent[]): Promise<NewsResource> {
+    const { newsId } = await this.main.client.api.request(this.generateURL(['n']), {
+      method: 'PUT',
+      body: { title, thumbnail: thumbnail.id, contents }
+    })
+
+    return await this.get(newsId) as NewsResource
   }
 }
