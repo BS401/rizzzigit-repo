@@ -14,7 +14,7 @@ export class Client {
   public constructor (options?: Partial<ClientOptions>) {
     this.#api = new API(this)
     this.#options = {
-      baseUrl: 'https://twice-fan-page-api.rizzzigit.replit.co',
+      baseUrl: 'https://twice-fan-page-api.rizzzigit.repl.co',
 
       ...options
     }
