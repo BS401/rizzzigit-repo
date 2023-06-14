@@ -66,7 +66,11 @@ export class AuthenticationManager extends BaseManager<AuthenticationResource, A
 
   public async login (username: string, password: string): Promise<void> {
     if (this.#sessionId != null) {
-      await this.logout()
+      try {
+        await this.logout()
+      } catch {
+        //
+      }
     }
 
     const { data: { sessionId } } = await this.main.client.api.request(this.generateURL(['a']), {

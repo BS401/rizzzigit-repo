@@ -6,6 +6,22 @@ export interface ClientOptions {
 }
 
 export class Client {
+  static get pathArray (): string[] {
+    const array: string[] = []
+
+    for (let entry of document.location.pathname.split('/')) {
+      entry = entry.trim().toLowerCase()
+
+      if (entry.length == 0) {
+        continue
+      }
+
+      array.push(entry)
+    }
+
+    return array
+  }
+
   static #instance?: Client
   public static getInstance (): Client {
     return this.#instance ?? (this.#instance = new this())
@@ -29,4 +45,8 @@ export class Client {
   public get options (): ClientOptions { return this.#options }
   public get api (): API { return this.#api }
   public get resources (): MainManager { return this.#resources }
+}
+
+if (typeof (window) !== 'undefined') {
+  Object.assign(window, { Client })
 }

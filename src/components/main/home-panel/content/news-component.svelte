@@ -24,6 +24,9 @@
 
   div.image {
     height: calc(100% - 32px);
+
+    box-shadow: 2px 2px 2px 2px #ffffff40;
+    border-radius: 8px;
   }
 
   div.image > img {
@@ -31,6 +34,7 @@
 
     width: 100%;
     height: 100%;
+    border-radius: 8px;
   }
 
   div.title > p {

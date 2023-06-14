@@ -5,6 +5,4 @@ export class AuthenticationResource extends BaseResource<AuthenticationResource,
   public constructor (manager: AuthenticationManager,  id: string, data: Record<string, unknown>) {
     super(manager, id, data)
   }
-
-  
 }

@@ -1,6 +1,4 @@
 <script>
-	import { browser } from '$app/environment';
-	import { page } from '$app/stores';
 	import Footer from '../components/footer.svelte';
 	import Main from '../components/main.svelte';
 	import Navigation from '../components/navigation.svelte';
