@@ -239,14 +239,12 @@ div.mainLeftPanel {
   float: left;
   width: calc(100% - 400px);
   height: 100%;
-  background-color: blue;
 }
 
 div.mainRightPanel {
   float: right;
   width: 400px;
   height: 100%;
-  background-color: green;
 }
 
 div.backgroundNotAtHome {

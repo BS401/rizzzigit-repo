@@ -9,7 +9,7 @@ export class NewsManager extends BaseManager<NewsResource, NewsManager> {
     super(main, 'news')
   }
 
-  public async list (offset?: number, length?: number) {
+  public async list (offset?: number, length?: number): Promise<NewsResource[]> {
     const { main: { client: { api } } } = this
 
     return (await api.request(this.generateURL(['n'], { offset, length }), { method: 'GET' })).data.map((entry: any) => new NewsResource(this, entry._id, entry))

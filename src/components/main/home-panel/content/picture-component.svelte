@@ -28,6 +28,8 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
+    box-shadow: 2px 2px 2px 2px #ffffff40;
   }
 </style>
 
