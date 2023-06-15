@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Client, NewsContentType, NewsResource } from "adswebsitewrapper";
+	import { Client, FileResource, NewsContentType, NewsResource, PictureResource } from "adswebsitewrapper";
 	import { onMount } from "svelte";
 
   let news: Array<NewsResource> = []
@@ -13,8 +13,19 @@
     const client = Client.getInstance()
 
     news = [await client.resources.news.get(newsId)] as [NewsResource]
-    thumbnail = (await news[0].getThumbnail()).rawUrl.toString()
+    thumbnail = ((await (await news[0].getThumbnail()).getFile()).rawUrl).toString()
   })
+
+  const getPictureUrl = async (pictureId: string): Promise<string> => {
+    const client = Client.getInstance()
+
+    const picture = await client.resources.pictures.get(pictureId) as PictureResource
+    const file = await client.resources.files.get(picture.fileId) as FileResource
+
+    return file.rawUrl.toString()
+  }
+
+  const openPicture = async (pictureId: string) => window.open(`/pictures/${pictureId}`, '_blank')
 </script>
 
 <style>
@@ -61,6 +72,10 @@
     object-fit: contain;
   }
 
+  img.imageContent:hover {
+    cursor: pointer;
+  }
+
   @media only screen and (max-width: 720px) {
     div.newsEntry {
       width: 100%;
@@ -72,7 +87,7 @@
 
 {#each news as entry}
   <div class="newsEntry">
-    <img class="newsThumbnail" alt="" src={thumbnail}/>
+    <img class="newsThumbnail" alt="" src={thumbnail} />
     <div class="newsContent">
       <h1>{entry.title}</h1>
       {#each entry.contents as content}
@@ -80,8 +95,9 @@
           <p class="textContent">{content.content}</p>
 
         {:else if content.contentType === NewsContentType.Image}
-          <img class="imageContent" alt="" src={content.url}/>
-
+          {#await getPictureUrl(content.pictureId) then url}
+            <img class="imageContent" alt="" on:click={() => openPicture(content.pictureId)} on:keypress={() => openPicture(content.pictureId)} src={url}/>
+          {/await}
         {:else if content.contentType === NewsContentType.Link}
           <a href={content.link}>{content.name}</a>
         {/if}

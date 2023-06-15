@@ -6,7 +6,7 @@
   let image: HTMLImageElement
 
   onMount(async () => {
-    image.src = `${(await data.getThumbnail()).rawUrl}`
+    image.src = `${(await (await data.getThumbnail()).getFile()).rawUrl}`
   })
 
   const open = () => window.open(`/news/${data.id}`, '_top')

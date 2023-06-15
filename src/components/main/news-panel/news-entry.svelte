@@ -9,7 +9,7 @@
   onMount(async () => {
     const thumbnail = await news.getThumbnail()
 
-    thumbnailUrl = thumbnail.rawUrl.toString()
+    thumbnailUrl = (await thumbnail.getFile()).rawUrl.toString()
   })
 
   const open = () => window.open(`/news/${news.id}`, '_top')
