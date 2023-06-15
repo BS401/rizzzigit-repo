@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { SvelteComponent, onMount } from "svelte";
-	import { Client } from "../../../api/core/client";
 	import NewsComponent from "./content/news-component.svelte";
 	import PictureComponent from "./content/picture-component.svelte";
+	import { Client } from "adswebsitewrapper";
 
   type Functions = {
     list: (offset: number, length: number) => Promise<[typeof SvelteComponent, any][]>
@@ -96,7 +96,7 @@
 
     const runChecker = async (): Promise<void> => {
       while (!hasEnded) {
-        if ((body.scrollLeft + body.clientWidth) >= loader.offsetLeft) {
+        if (body.scrollLeft > body.scrollWidth - (body.clientWidth * 2)) {
           await addNewContent()
         }
 

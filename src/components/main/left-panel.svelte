@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { SvelteComponent, onMount } from "svelte";
 	import NewsLeftPanel from "./news-panel/news-left-panel.svelte";
-	import { Client } from "../../api/core/client";
+	import PictureLeftPanel from "./picture-panel/picture-left-panel.svelte";
+	import ProgrammersLeftPanel from "./programmers-panel/programmers-left-panel.svelte";
+	import { Client } from "adswebsitewrapper";
 
   let component: typeof SvelteComponent
 
@@ -9,6 +11,15 @@
     switch (Client.pathArray[0]) {
       case 'news':
         component = NewsLeftPanel
+        break
+
+      case 'pictures':
+        component = PictureLeftPanel
+        break
+
+      case 'programmers':
+        component = ProgrammersLeftPanel
+        break
     }
   })
 </script>

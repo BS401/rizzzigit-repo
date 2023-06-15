@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { Client } from 'adswebsitewrapper';
 	import { onMount } from 'svelte';
-	import { Client } from '../api/core/client';
 
   let components: Array<[string]> = []
 

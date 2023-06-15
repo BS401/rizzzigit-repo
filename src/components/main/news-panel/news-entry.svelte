@@ -1,6 +1,6 @@
 <script lang="ts">
+	import type { NewsResource } from "adswebsitewrapper";
 	import { onMount } from "svelte";
-	import type { NewsResource } from "../../../api/resource/data/news";
 
   export let news: NewsResource
   let element: HTMLDivElement

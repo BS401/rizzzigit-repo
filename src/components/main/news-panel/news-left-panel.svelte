@@ -1,7 +1,6 @@
 <script lang="ts">
+	import { Client, NewsContentType, NewsResource } from "adswebsitewrapper";
 	import { onMount } from "svelte";
-	import { Client } from "../../../api/core/client";
-	import { NewsContentType, type NewsResource } from "../../../api/resource/data/news";
 
   let news: Array<NewsResource> = []
   let thumbnail: string
@@ -13,7 +12,7 @@
     }
     const client = Client.getInstance()
 
-    news = [await client.resources.news.get(newsId)]
+    news = [await client.resources.news.get(newsId)] as [NewsResource]
     thumbnail = (await news[0].getThumbnail()).rawUrl.toString()
   })
 </script>
@@ -26,8 +25,13 @@
     height: calc(100% - 64px);
     overflow-y: auto;
 
-    background-color: #ffffff40;
+    border: solid;
+    border-width: 1px;
+    border-color: #ffffff40;
+    box-sizing: border-box;
     border-radius: 8px;
+
+    box-shadow: 2px 2px 2px #ffffff40;
   }
   div.newsEntry::-webkit-scrollbar {
     display: none;
@@ -50,6 +54,13 @@
     text-align: center;
   }
 
+  img.imageContent {
+    width: 100%;
+    height: 192px;
+
+    object-fit: contain;
+  }
+
   @media only screen and (max-width: 720px) {
     div.newsEntry {
       width: 100%;
@@ -69,7 +80,7 @@
           <p class="textContent">{content.content}</p>
 
         {:else if content.contentType === NewsContentType.Image}
-          <img alt="" src={content.url}/>
+          <img class="imageContent" alt="" src={content.url}/>
 
         {:else if content.contentType === NewsContentType.Link}
           <a href={content.link}>{content.name}</a>

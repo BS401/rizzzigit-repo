@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import NewsEntry from "./news-entry.svelte";
-	import { Client, type NewsResource } from "adswebsitewrapper";
+	import { onMount } from "svelte";
+	import PictureEntry from "./picture-entry.svelte";
+	import { Client, type PictureResource } from "adswebsitewrapper";
 
-  let newsArray: Array<[typeof NewsEntry, NewsResource]> = []
+  let pictureArray: [typeof PictureEntry, PictureResource][] = []
   let hasEnded: boolean = false
 
-  let newsContainer: HTMLDivElement
+  let pictureContainer: HTMLDivElement
   let loader: HTMLDivElement
 
   const runScrollCheck = async (): Promise<void> => {
     while (!hasEnded) {
-      if (newsContainer.scrollTop >= (newsContainer.scrollHeight - (newsContainer.clientHeight * 2))) {
+      if (pictureContainer.scrollTop >= (pictureContainer.scrollHeight - (pictureContainer.clientHeight * 2))) {
         addNewContent()
       }
 
@@ -33,14 +33,14 @@
       return offset
     })()
 
-    const news = await Client.getInstance().resources.news.list(listOffset + newsContainer.children.length - 1, interval)
-    if (news.length < interval) {
+    const pictures = await Client.getInstance().resources.pictures.list(listOffset + pictureContainer.children.length - 1, interval)
+    if (pictures.length < interval) {
       hasEnded = true
     }
 
-    for (const newsEntry of news) {
-      newsArray.push([NewsEntry, newsEntry])
-      newsArray = newsArray
+    for (const pictureEntry of pictures) {
+      pictureArray.push([PictureEntry, pictureEntry])
+      pictureArray = pictureArray
     }
   }
 
@@ -48,9 +48,8 @@
     void runScrollCheck()
   })
 </script>
-
 <style>
-  div.newsContainer {
+  div.pictureContainer {
     width: calc(100% - 40px);
     height: calc(100% - 64px);
 
@@ -66,14 +65,14 @@
   }
 
   @media only screen and (max-width: 720px) {
-    div.newsContainer {
+    div.pictureContainer {
       width: 100%;
       margin: 0px;
       border-radius: 0px;
     }
   }
 
-  div.newsContainer::-webkit-scrollbar {
+  div.pictureContainer::-webkit-scrollbar {
     display: none;
   }
 
@@ -87,9 +86,9 @@
   }
 </style>
 
-<div bind:this={newsContainer} class="newsContainer">
-  {#each newsArray as [component, resource]}
-    <svelte:component this={component} news={resource} />
+<div bind:this={pictureContainer} class="pictureContainer">
+  {#each pictureArray as [component, resource]}
+    <svelte:component this={component} picture={resource}></svelte:component>
   {/each}
   <div bind:this={loader} class="loader">
     <div class="loaderContainer">

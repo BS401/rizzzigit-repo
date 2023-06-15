@@ -1,5 +1,4 @@
 <script>
-	import { Client } from "../../../api/core/client";
 </script>
 
 <style>

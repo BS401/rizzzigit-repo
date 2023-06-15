@@ -1,6 +1,6 @@
 <script lang="ts">
+	import type { PictureResource } from "adswebsitewrapper";
 	import { onMount } from "svelte";
-	import type { PictureResource } from "../../../../api/resource/data/picture";
 
   export let data: PictureResource
   let image: HTMLDivElement
