@@ -23,7 +23,7 @@
 					components = components
 
 					// await client.resources.news.create(`news: ${file.name}`, id, [])
-					await client.resources.pictures.create(id)
+					// await client.resources.pictures.create(id)
 				})()
 			}
 		});

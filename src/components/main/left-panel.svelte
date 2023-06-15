@@ -2,7 +2,7 @@
 	import { SvelteComponent, onMount } from "svelte";
 	import NewsLeftPanel from "./news-panel/news-left-panel.svelte";
 	import PictureLeftPanel from "./picture-panel/picture-left-panel.svelte";
-	import ProgrammersLeftPanel from "./programmers-panel/programmers-left-panel.svelte";
+	import ProgrammersLeftPanel from "./programmers-panel/programmers-panel.svelte";
 	import { Client } from "adswebsitewrapper";
 
   let component: typeof SvelteComponent
