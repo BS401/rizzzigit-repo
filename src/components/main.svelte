@@ -4,8 +4,9 @@
   import HomePanel from './main/home-panel.svelte';
   import RightPanel from './main/right-panel.svelte';
   import LeftPanel from './main/left-panel.svelte';
-  import ProgrammersPanel from './main/programmers-panel/programmers-panel.svelte';
-	import MembersPanel from './main/members-panel/members-panel.svelte';
+  import ProgrammersPanel from './main/programmers-panel.svelte';
+	import MembersPanel from './main/members-panel.svelte';
+	import DiscographyPanel from './main/discography-panel.svelte';
 </script>
 
 <style>
@@ -20,9 +21,11 @@
       <ProgrammersPanel />
     {:else if $page.url.pathname.startsWith('/members')}
       <MembersPanel />
+    {:else if $page.url.pathname.startsWith('/discography')}
+      <DiscographyPanel />
     {:else}
-      <RightPanel />
       <LeftPanel />
+      <RightPanel />
     {/if}
   </div>
 </div>

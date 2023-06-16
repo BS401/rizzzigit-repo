@@ -100,7 +100,7 @@
 </style>
 
 <div class="memberContainer">
-  <h1 class="header">Meet The Team</h1>
+  <h1 class="header">TWICE Members</h1>
   <div class="memberList">
     {#each members as { name, photoId }}
       <div class="memberEntry">

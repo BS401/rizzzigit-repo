@@ -1,31 +1,33 @@
 <script lang="ts">
-	import { Client, FileResource, NewsContentType, NewsResource, PictureResource } from "adswebsitewrapper";
+	import { Client, FileResource, NewsContentType, type NewsImageContent, NewsResource, PictureResource, type NewsContentResolvable } from "adswebsitewrapper";
 	import { onMount } from "svelte";
 
-  let news: Array<NewsResource> = []
+  let news: Array<NewsResource> | null = []
   let thumbnail: string
 
   onMount(async () => {
-    const newsId = Client.pathArray[1] || ((await Client.getInstance().resources.news.list())[0].id)
+    const newsId = Client.pathArray[1]
     if (newsId == null) {
+      news = null
       return
     }
+
     const client = Client.getInstance()
 
     news = [await client.resources.news.get(newsId)] as [NewsResource]
     thumbnail = ((await (await news[0].getThumbnail()).getFile()).rawUrl).toString()
   })
 
-  const getPictureUrl = async (pictureId: string): Promise<string> => {
+  const getPictureUrl = async (content: NewsContentResolvable): Promise<string> => {
     const client = Client.getInstance()
 
-    const picture = await client.resources.pictures.get(pictureId) as PictureResource
+    const picture = await client.resources.pictures.get((content as NewsImageContent).pictureId) as PictureResource
     const file = await client.resources.files.get(picture.fileId) as FileResource
 
     return file.rawUrl.toString()
   }
 
-  const openPicture = async (pictureId: string) => window.open(`/pictures/${pictureId}`, '_blank')
+  const openPicture = async (content: NewsContentResolvable) => window.open(`/pictures/${(content as NewsImageContent).pictureId}`, '_blank')
 </script>
 
 <style>
@@ -85,23 +87,33 @@
   }
 </style>
 
-{#each news as entry}
-  <div class="newsEntry">
-    <img class="newsThumbnail" alt="" src={thumbnail} />
-    <div class="newsContent">
-      <h1>{entry.title}</h1>
-      {#each entry.contents as content}
-        {#if content.contentType === NewsContentType.Text}
-          <p class="textContent">{content.content}</p>
+{#if news != null}
+  {#each news as entry}
+    <div class="newsEntry">
+      <img class="newsThumbnail" alt="" src={thumbnail} />
+      <div class="newsContent">
+        <h1>{entry.title}</h1>
+        {#each entry.contents as content}
+          {#if content.contentType === NewsContentType.Text}
+            <p class="textContent">{content.content}</p>
 
-        {:else if content.contentType === NewsContentType.Image}
-          {#await getPictureUrl(content.pictureId) then url}
-            <img class="imageContent" alt="" on:click={() => openPicture(content.pictureId)} on:keypress={() => openPicture(content.pictureId)} src={url}/>
-          {/await}
-        {:else if content.contentType === NewsContentType.Link}
-          <a href={content.link}>{content.name}</a>
-        {/if}
-      {/each}
+          {:else if content.contentType === NewsContentType.Image}
+            {#await getPictureUrl(content) then url}
+              <img class="imageContent" alt="" on:click={() => openPicture(content)} on:keypress={() => openPicture(content)} src={url}/>
+            {/await}
+          {:else if content.contentType === NewsContentType.Link}
+            <a href={content.link}>{content.name}</a>
+          {/if}
+        {/each}
+      </div>
     </div>
+  {/each}
+{:else}
+  <div class="newsEntry">
+    <h1>Click any article {#if document.documentElement.clientWidth > 720}
+      on the right slide
+    {:else}
+      below
+    {/if} to view.</h1>
   </div>
-{/each}
+{/if}

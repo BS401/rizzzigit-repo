@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import NewsEntry from "./news-entry.svelte";
 	import { Client, type NewsResource } from "adswebsitewrapper";
+	import { page } from "$app/stores";
 
   let newsArray: Array<[typeof NewsEntry, NewsResource]> = []
   let hasEnded: boolean = false
