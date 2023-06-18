@@ -52,7 +52,10 @@
 
   img.newsThumbnail {
     width: 100%;
+    height: 30%;
+    max-height: 512px;
     border-radius: 8px 8px 0px 0px;
+    object-fit: cover;
   }
 
   div.newsContent {
