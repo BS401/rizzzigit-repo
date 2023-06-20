@@ -4,15 +4,22 @@
 	import { onMount } from "svelte";
 
   let list: NoticeResource[] = []
+  let loader: HTMLImageElement
 
   onMount(async () => {
     list = await Client.getInstance().resources.notices.list(0, 10)
 
     void (async () => {
-      while (true) {
+      let finished = false
+      while (!finished) {
         if (document.documentElement.scrollTop > document.documentElement.scrollHeight - document.documentElement.clientHeight - 10) {
-          list.push(...await Client.getInstance().resources.notices.list(list.length, 10))
+          const result = await Client.getInstance().resources.notices.list(list.length, 10)
+          list.push(...result)
           list = list
+
+          if (result.length < 10) {
+            finished = loader.hidden = true
+          }
         }
 
         await new Promise<void>((resolve) => setTimeout(resolve, 100))
@@ -20,7 +27,6 @@
     })()
 
     const styleElement = document.createElement('style')
-
     styleElement.innerText = 'div.mainContent, div.mainContainer { height: unset; }'
     document.head.appendChild(styleElement)
   })
@@ -69,6 +75,13 @@ div.eventTextContainer {
   p.year {
     font-size: 13px;
   }
+
+  img.loader {
+    width: 100%;
+    height: 64px;
+
+    object-fit: contain;
+  }
 </style>
 
 <div class="eventContainer">
@@ -85,4 +98,5 @@ div.eventTextContainer {
       </div>
     {/each}
   </div>
+  <img bind:this={loader} class="loader" src="/images/loader.svg" alt=""/>
 </div>
