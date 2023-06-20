@@ -4,42 +4,52 @@
   const members: {
     name: string
     photoId: string
+    birthday: Date
   }[] = [
     {
       name: 'Im Nayeon',
-      photoId: '648b203a72df23dff4340672'
+      photoId: '648b203a72df23dff4340672',
+      birthday: new Date('1995.09.22')
     },
     {
       name: 'Yoo Jeongyeon',
-      photoId: '648b203a72df23dff434068a'
+      photoId: '648b203a72df23dff434068a',
+      birthday: new Date('1996.11.01')
     },
     {
       name: 'Hirai Momo',
-      photoId: '648b203a72df23dff4340681'
+      photoId: '648b203a72df23dff4340681',
+      birthday: new Date('1996.11.09')
     },
     {
       name: 'Minatoaki Sana',
-      photoId: '648b203a72df23dff4340688'
+      photoId: '648b203a72df23dff4340688',
+      birthday: new Date('1996.12.29')
     },
     {
       name: 'Park Jihyo',
-      photoId: '648b203a72df23dff434067f'
+      photoId: '648b203a72df23dff434067f',
+      birthday: new Date('1997.02.01')
     },
     {
       name: 'Myoui Mina',
-      photoId: '648b203a72df23dff434067d'
+      photoId: '648b203a72df23dff434067d',
+      birthday: new Date('1997.03.24')
     },
     {
       name: 'Kim Dahyun',
-      photoId: '648b203a72df23dff43406c0'
+      photoId: '648b203a72df23dff43406c0',
+      birthday: new Date('1998.05.28')
     },
     {
       name: 'Son Chaeyoung',
-      photoId: '648b203a72df23dff43406bd'
+      photoId: '648b203a72df23dff43406bd',
+      birthday: new Date('1999.04.23')
     },
     {
       name: 'Chou Tzuyu',
-      photoId: '648b203a72df23dff43406b4'
+      photoId: '648b203a72df23dff43406b4',
+      birthday: new Date('1999.06.14')
     }
   ]
 
@@ -97,12 +107,21 @@
     align-items: center;
     justify-content: center;
   }
+
+  div.memberText > p {
+    text-align: center;
+  }
+
+  p.birthday {
+    font-size: 12px;
+    text-decoration: none;
+  }
 </style>
 
 <div class="memberContainer">
   <h1 class="header">TWICE Members</h1>
   <div class="memberList">
-    {#each members as { name, photoId }}
+    {#each members as { name, photoId, birthday }}
       <div class="memberEntry">
         <div class="memberImage">
           {#if photoId != null}
@@ -113,7 +132,8 @@
         </div>
         <div class="memberTextContainer">
           <div class="memberText">
-            <p><b>{name}</b></p>
+            <p class="name"><b>{name}</b></p>
+            <p class="birthday">Birthday: {birthday.toDateString()}</p>
           </div>
         </div>
       </div>
