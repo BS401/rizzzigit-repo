@@ -7,6 +7,7 @@
   import ProgrammersPanel from './main/programmers-panel.svelte';
 	import MembersPanel from './main/members-panel.svelte';
 	import DiscographyPanel from './main/discography-panel.svelte';
+	import NoticePanel from './main/events-panel.svelte';
 </script>
 
 <style>
@@ -23,6 +24,8 @@
       <MembersPanel />
     {:else if $page.url.pathname.startsWith('/discography')}
       <DiscographyPanel />
+    {:else if $page.url.pathname.startsWith('/events')}
+      <NoticePanel />
     {:else}
       <LeftPanel />
       <RightPanel />

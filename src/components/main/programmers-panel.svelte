@@ -13,19 +13,23 @@
     },
     {
       name: 'Suyat, Arvin John',
-      address: '308 Negra Aurora Lane, Albaquerque, New Mexico'
+      address: '308 Negra Aurora Lane, Albaquerque, New Mexico',
+      photoId: '6490696b26e992240e514fb5'
     },
     {
       name: 'Liwanag, Allan Raphael',
-      address: '308 Negra Aurora Lane, Albaquerque, New Mexico'
+      address: '308 Negra Aurora Lane, Albaquerque, New Mexico',
+      photoId: '6490697126e992240e514fe2'
     },
     {
-      name: 'Guerrero',
-      address: '308 Negra Aurora Lane, Albaquerque, New Mexico'
+      name: 'Guerrero, Fredrick',
+      address: '308 Negra Aurora Lane, Albaquerque, New Mexico',
+      photoId: '6490697126e992240e514fe4'
     },
     {
       name: 'Marabe, Jermaine Benedict',
-      address: '308 Negra Aurora Lane, Albaquerque, New Mexico'
+      address: '308 Negra Aurora Lane, Albaquerque, New Mexico',
+      photoId: '64906ab526e992240e515162'
     }
   ]
 
@@ -69,6 +73,7 @@
     height: 100%;
 
     border-radius: 8px 0px 0px 8px;
+    object-fit: cover;
   }
 
   div.programmerTextContainer {
