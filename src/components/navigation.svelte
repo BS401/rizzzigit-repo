@@ -1,5 +1,5 @@
 <script lang="ts">
-  const pages: string[] = ['Home', 'News', 'Discography', 'Members', 'Pictures', 'Events', 'Programmers']
+  const pages: string[] = ['Home', 'News', 'Discography', 'Members', 'Pictures', 'Events', 'Programmers', 'Admin']
 
   function open (page: string) {
     const path = `/${page == 'Home' ? '' : page.toLowerCase()}`
