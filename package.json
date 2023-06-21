@@ -37,6 +37,7 @@
 	"license": "MPL-2.0",
 	"author": "RizzziGit",
 	"dependencies": {
+		"@rizzzi/eventemitter": "github:Rizzzigit/EventEmitter",
 		"adswebsitewrapper": "github:BS401/rizzzigit-api-wrapper-repo"
 	}
 }
