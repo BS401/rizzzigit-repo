@@ -255,7 +255,7 @@ div.backgroundDecoratorNotAtHome {
   background-color: #7a589fff;
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 950px) {
   div.navigationContent {
     padding: 0px 8px 0px 8px;
   }
